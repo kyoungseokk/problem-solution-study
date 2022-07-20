@@ -1,4 +1,4 @@
-package DAY01.P2143;
+package DAY02.P2143;
 
 import java.io.*;
 import java.util.*;

@@ -1,10 +1,9 @@
-package DAY01.DFS;
+package DAY01.DFS_P1062;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class Dfs {
 

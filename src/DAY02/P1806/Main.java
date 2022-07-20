@@ -1,4 +1,4 @@
-package DAY01.P1806;
+package DAY02.P1806;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

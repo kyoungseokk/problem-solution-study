@@ -1,7 +1,6 @@
-package DAY01.P2805;
+package DAY02.P2805;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {

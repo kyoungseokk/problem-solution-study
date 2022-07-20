@@ -1,4 +1,4 @@
-package DAY01.P1713;
+package DAY02.P1713;
 
 import java.util.ArrayList;
 import java.util.Collections;
