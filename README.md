@@ -1,3 +1,3 @@
 # problem-solution-study
 
-samsung SDS algorithm xmrrkd
+samsung SDS algorithm xmrrkd (With aengun)
