@@ -39,7 +39,7 @@ public class Main {
         Arrays.sort(jewelries, Comparator.comparingInt(Jewelry::getWeight));
         // 보석 가격이 높은값 기준 힙
         // PQ는 comparator 반드시 줘야함
-        PriorityQueue<Jewelry> pq = new PriorityQueue<Jewelry>(Comparator.comparingInt(Jewelry::getValue).reversed());
+        PriorityQueue<Jewelry> pq = new PriorityQueue<>(Comparator.comparingInt(Jewelry::getValue).reversed());
         int jIndex = 0;
         long result = 0;
         // 1. 남은 가방 중 제일 작은 가방을 선택 <- 정렬

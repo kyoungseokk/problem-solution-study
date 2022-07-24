@@ -1,6 +1,7 @@
 package DAY03.P1927;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -11,16 +12,18 @@ public class Main {
     static int N;
 
     public static void main(String[] args) throws IOException {
+        System.setIn(new FileInputStream("src/DAY03/P1927/input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        minHeap mH = new minHeap();
         N = Integer.parseInt(br.readLine());
 
-        for (int i =0; i< N; i++) {
+        minHeap mH = new minHeap();
+
+        for (int i = 0; i < N; i++) {
             int input = Integer.parseInt(br.readLine());
-            if(input == 0) {
+            if (input == 0) {
                 System.out.println(mH.delete());
             } else {
-
+                mH.insert(input);
             }
         }
 
@@ -29,10 +32,10 @@ public class Main {
 
 }
 
-class MinHeap {
+class minHeap {
     List<Integer> list;
 
-    public MinHeap() {
+    public minHeap() {
         list = new ArrayList<>();
         list.add(0);
     }

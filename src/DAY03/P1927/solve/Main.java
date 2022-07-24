@@ -1,4 +1,4 @@
-package DAY03.P1927;
+package DAY03.P1927.solve;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -7,15 +7,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class solution {
+public class Main {
 
     static int N;
 
     public static void main(String[] args) throws IOException {
-        System.setIn(new FileInputStream("src/DAY03/P1927/input.txt"));
+        System.setIn(new FileInputStream("src/DAY03/P1927/solve/input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        MinHeap mh = new MinHeap();
         N = Integer.parseInt(br.readLine());
-        minHeap mh = new minHeap();
 
         for (int i = 0; i < N; i++) {
             int input = Integer.parseInt(br.readLine());
@@ -25,15 +25,20 @@ public class solution {
                 mh.insert(input);
             }
         }
+
     }
 }
 
-class minHeap {
+class MinHeap {
     List<Integer> list;
 
-    public minHeap() {
+    public MinHeap() {
         list = new ArrayList<>();
         list.add(0);
+    }
+
+    public int size() {
+        return list.size();
     }
 
     public void insert(int val) {
@@ -93,6 +98,8 @@ class minHeap {
                 list.set(currentPos, list.get(minPos));
                 list.set(minPos, temp);
                 currentPos = minPos;
+            } else {
+                break;
             }
         }
         return top;
