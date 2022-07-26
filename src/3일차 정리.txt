@@ -1,0 +1,100 @@
+인덱스 트리 - 데이터 갱신 방법
+1. 해당 노드 위치 값 수정
+2. 부모 따라 올라가면서 결과값 수정
+3. N을 바꿨다면 3을 포함하고 있는 노드들이 모드 수정
+
+리프부터 루트까지 올라가므로 수행시간 logN
+
+3을 포함한 어떠한 영역들만 영향을 받음
+
+querying & update
+
+인덱스트리
+ - 포화 이진트리
+ - 리프 노드 : 배열에 적혀있는 수
+ - 내부 노드 : 왼쪽 자식과 오른쪽 자식의 합
+ - 리프 노드 개수(S) : N 이상의 2^n으로 표현 가능한 수
+ - 높이 : logS
+ - 총 노드 개수 : 2*S - 1개
+
+3번째 S + 3 - 1 O(1)
+S는 리프 개수 or start index number
+query 짜기 전에 연관 없음~자식에게 위임 그림 그려볼 것
+
+//업데이트
+Top-Down
+DFS 기반 트리 탐색(재귀 호출)
+사람이 손으로 하는 방식과 유사
+왼쪽 = node * 2 // 오른쪽 = node * 2 + 1
+가지치기 가능
+카운팅 쿼리? (나중에 보여주심)
+
+Botton-up 
+반복문 기반 이동
+index의 홀짝 특성 이용(뒤에서 자세하게)
+부모 = Node / 2 이용
+코드 단순
+수행 속도 미세하게 빠름
+
+Top-down
+초기화 Init(left, right, node(실제 트리의 노드 인덱스))
+root부터 init(1,8,1)
+내부노드 일 경우(left != right)
+-왼쪽자식 (left, mid, node*2) 호출
+-오른쪽 (mid + 1, right, node*2 + 1) 호출
+-왼쪽 자식 + 오른쪽 자식 값을 합쳐서 노드에 저장
+-노드의 값을 리턴
+리프노드 일 경우(left==right)
+-노드에 배열값을 저장
+-노드의 값 리턴
+
+Top-Down2
+//Query(left, right, node, queryLeft, queryRight)
+루트 (1,8,1,3,7)
+왼쪽 (1,4,2,3,7) queryleft,queryright 그냥 물어봐도 된다
+오른쪽 (5,8,3,3,7)
+//Update(left, right, node, target, diff)
+target 미포함 - 연관없음 - 무시
+target 포함
+ - 현재 노드에 diff 반영
+ - 자식이 있을 경우 왼쪽 update(I, mid, node*2, 3, -2)
+
+Bottom-up
+S가 제일 중요
+D[] leaf에 채움
+리프노드 순회
+T[S + 0~N-1]까지 데이터 채워줌
+내부노드 순회 index = [s-1] ~ [1]까지
+init은 bottom-up쓰는게 편하다 - for문으로 만들어낼 수 있음
+
+Bottom-up
+//Query(queryLeft, queryRight)
+리프노드부터 시작(3,7)
+nodeLeft = S + queryLeft - 1
+nodeRight = S + queryRight - 1;
+왼쪽은 항상 짝수, 오른쪽은 항상 홀수
+while (nodeLeft <= nodeRight)
+leftNode 분기 조건
+-짝 : 부모 값 사용 가능 = lt = lt / 2;
+-홀 : 현재 노드 값 추가 => lt = (lt + 1) / 2
+rightNode 분기 조건
+-짝 : 현재 노드 값 추가 = rt = (rt - 1) / 2
+-홀 : 부모 값 사용 가능 rt = rt / 2;
+
+//Update(target, value)
+리프부터 시작 update(3,2)
+node = S + target - 1
+부모로 이동 node /= 2;
+while (node >= 1)
+좌측node*2과 우측node*2+1의 합을 노드에 저장
+부모로 이동 node /= 2;
+
+카운팅 쿼리 1-8이 30
+6번쨰로 맛있는 사탕은?
+111 22 3333 44444 이런식으로 리프노드에 있음
+6번째는 3에 속해있다.
+update 가지치기 ex) 과녁 맞추기 0,1로 표시하는 문제
+Top-down으로 모든 문제를 풀 수 있지만 bottomup은 모든 문제 X
+bottom up은 옵션
+
+//여기까지 인덱스트리 이론 
